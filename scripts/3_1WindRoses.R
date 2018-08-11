@@ -80,3 +80,6 @@ dev.off()
 rm(windRoseMonth, windRoseSeason, windRoseTotal, windInitial)
 
 detach(package:openair, unload = TRUE)
+
+## Notify that script's end has been reached ##
+if (require(beepr)) {beepr::beep(1)}

@@ -54,8 +54,16 @@ source("scripts/fun/saveA5.R")
 # source("scripts/3_1WindRoses.R")
 
 # Load the data set to be used throughout EDA, in data frame and msts objects.
-source("scripts/3_2EDAload")
+source("scripts/3_2EDAload.R")
 
 # Create initial box plots, to explore seasonality
 source("scripts/3_3EDABoxPlot.R")
 
+# Compare Box-Cox transformation options
+source("scripts/3_4BoxCox.R")
+
+# Explore decomposition methods options
+source("scripts/3_5Decomp.R")
+
+# ACF and PACF plots
+source("scripts/3_6ACF.R")

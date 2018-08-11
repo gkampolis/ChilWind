@@ -196,3 +196,6 @@ write_delim(wind,
 rm(bottomRow, NAsImputePlot,plotNAsImputed,
    plotNAsFocused, plotNAs, freq, freqDay, freqYear,
    wind, whichNA, windSpeedTS)
+
+## Notify that script's end has been reached ##
+if (require(beepr)) {beepr::beep(1)}

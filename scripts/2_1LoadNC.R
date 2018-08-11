@@ -48,3 +48,6 @@ utils::zip("./data/windDataChilbolton.zip","./data/windDataChilbolton.csv")
 
 ## Remove intermediary .csv file ##
 file.remove("./data/windDataChilbolton.csv")
+
+## Notify that script's end has been reached ##
+if (require(beepr)) {beepr::beep(1)}

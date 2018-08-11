@@ -36,3 +36,6 @@ write_delim(windHourly,
             delim = ",")
 
 rm(n, df, dateTime, windHourly, meanNA)
+
+## Notify that script's end has been reached ##
+if (require(beepr)) {beepr::beep(1)}

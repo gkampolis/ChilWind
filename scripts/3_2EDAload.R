@@ -13,3 +13,6 @@ wind <- read_csv("data/windTrainSet.csv")
 freq <- c(24, 24*365.25) # Diurnal & Annual seasonality
 
 windTS <- msts(wind$windSpeed, freq, ts.frequency = freq[1])
+
+## Notify that script's end has been reached ##
+if (require(beepr)) {beepr::beep(1)}
