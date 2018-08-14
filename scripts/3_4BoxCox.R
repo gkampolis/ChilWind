@@ -78,7 +78,7 @@ histWind <- ggplot(windTS, aes(x = windTS)) +
          "Min: ", round(windSummary[1], digits = 2),
          " m/s | Median: ", round(windSummary[3], digits = 2),
          " m/s | Mean: ", round(windSummary[4], digits = 2),
-         " m/s | Max: ", round(windSummary[6], digits = 2)
+         " m/s | Max: ", round(windSummary[6], digits = 2), " m/s"
        )
   )
 

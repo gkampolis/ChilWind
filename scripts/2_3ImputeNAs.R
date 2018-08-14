@@ -23,7 +23,7 @@ windInitial <- bind_cols(as.data.frame(dateTime),
 rm(dateTime) # not needed anymore.
 windInitial %<>% select(dateTime, windSpeed) # drop direction data
 
-windTestSet <- wind %>% filter(dateTime>=ymd_hms("2018-01-15 00:00:00"))
+windTestSet <- wind %>% filter(dateTime >= ymd_hms("2018-01-15 00:00:00"))
 wind %<>% filter(dateTime < ymd_hms("2018-01-15 00:00:00")) # training set
 
 windInitial %<>% filter(dateTime < ymd_hms("2018-01-15 00:00:00"))
@@ -50,7 +50,7 @@ histWindInitial <- ggplot(windInitial, aes(x = windSpeed)) +
                  fill = "white") +
   geom_rug(sides = "b") +
   geom_density(colour = "gray", fill = "gray", alpha = 1/2) +
-  theme(axis.title.x=element_blank()) +
+  theme(axis.title.x = element_blank()) +
   xlim(0,30) +
   labs(y = "Density",
        title = "Histogram & density plot before hourly conversion.",
@@ -73,7 +73,7 @@ histWind <- ggplot(wind, aes(x = windSpeed)) +
   geom_rug(sides = "b") +
   xlim(0,30) +
   geom_density(colour = "gray", fill = "gray", alpha = 1/2) +
-  theme(axis.title.x=element_blank()) +
+  theme(axis.title.x = element_blank()) +
   labs(y = "Density",
        title = "Histogram & density plot after hourly conversion.",
        subtitle = paste0(
@@ -125,7 +125,7 @@ plotNAsFocused <- wind[(min(whichNA)-48):(max(whichNA)+48),] %>%
   geom_path() +
   ylim(0,7) +
   scale_colour_nejm() +
-  theme(legend.position="none") +
+  theme(legend.position = "none") +
   labs(title = "Before imputation",
        x = "Time",
        y = "Wind Speed (m/s)",
@@ -179,12 +179,15 @@ saveA5(histHourlyCompare, "Hourly_Conversion_Imputation", "H")
 rm(histWindInitial, histWind, histWindImputed, histHourlyCompare,
    windInitial, windInitialSummary, windSummary
 )
-bottomRow <- plot_grid(plotNAsFocused, plotNAsImputed,
-                       nrow = 1, align = "hv", axis = "lrtb"
+
+bottomRow <- plot_grid(plotNAsFocused + theme(axis.title.x = element_blank()),
+                       plotNAsImputed + theme(axis.title.x = element_blank()),
+                       nrow = 1, align = "h", axis = "tb"
                        )
-NAsImputePlot <- plot_grid(plotNAs, bottomRow,
-                           ncol = 1, align = "v", axis = "lrtb"
-                           )
+
+NAsImputePlot <- gridExtra::grid.arrange(plotNAs + theme(axis.title.x = element_blank()),
+                        bottomRow,
+                        ncol = 1)
 
 saveA5(NAsImputePlot, "HourlyImputation", "H")
 
