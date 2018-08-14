@@ -67,3 +67,20 @@ source("scripts/3_5Decomp.R")
 
 # ACF and PACF plots
 source("scripts/3_6ACF.R")
+
+# Explore the effects of differencing.
+source("scripts/3_7Diff.R")
+
+# Unload data set to make section autonomous
+rm(wind, freq, windTS)
+
+######################## Model Building and Forecasting #########################
+
+# Load test and train sets
+source("scripts/4_1Load.R")
+
+# The "naive" category: Persistence, Mean climatological
+# The "non-seasonal" category: New Reference, ETS, ARIMA
+# The STL category: STL-ETS, STL-ARIMA
+# The complex category: Neural Network and TBATS
+source("scripts/4_2Models.R")
