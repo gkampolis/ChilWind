@@ -83,4 +83,4 @@ source("scripts/4_1Load.R")
 # The "econometrics": category: ETS, ARIMA with variations
 # The STL category: STL-ETS, STL-ARIMA
 # The complex category: Neural Network and TBATS
-source("scripts/4_2Models.R")
+source("scripts/4_2NaiveModels.R")
