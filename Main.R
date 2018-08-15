@@ -54,25 +54,25 @@ source("scripts/fun/saveA5.R")
 # source("scripts/3_1WindRoses.R")
 
 # Load the data set to be used throughout EDA, in data frame and msts objects.
-source("scripts/3_2EDAload.R")
+# source("scripts/3_2EDAload.R")
 
 # Create initial box plots, to explore seasonality
-source("scripts/3_3EDABoxPlot.R")
+# source("scripts/3_3EDABoxPlot.R")
 
 # Compare Box-Cox transformation options
-source("scripts/3_4BoxCox.R")
+# source("scripts/3_4BoxCox.R")
 
 # Explore decomposition methods options
-source("scripts/3_5Decomp.R")
+# source("scripts/3_5Decomp.R")
 
 # ACF and PACF plots
-source("scripts/3_6ACF.R")
+# source("scripts/3_6ACF.R")
 
 # Explore the effects of differencing.
-source("scripts/3_7Diff.R")
+# source("scripts/3_7Diff.R")
 
 # Unload data set to make section autonomous
-rm(wind, freq, windTS)
+# rm(wind, freq, windTS)
 
 ######################## Model Building and Forecasting #########################
 
