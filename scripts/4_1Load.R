@@ -6,13 +6,17 @@
 #
 # ##############################################################################
 
-wind <- read_csv("data/windTrainSet.csv")
+windTrain <- read_csv("data/windTrainSet.csv")
+
+windTest <- read_csv("data/windTestSet.csv")
 
 # Create time series
 
 freq <- c(24, 24*365.25) # Diurnal & Annual seasonality
 
-windTS <- msts(wind$windSpeed, freq, ts.frequency = freq[1])
+windTrainTS <- msts(windTrain$windSpeed, freq, ts.frequency = freq[1])
+
+windTestTS <- msts(windTest$windSpeed, freq, ts.frequency = freq[1])
 
 ## Notify that script's end has been reached ##
 if (require(beepr)) {beepr::beep(1)}
