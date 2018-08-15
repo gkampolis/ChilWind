@@ -76,11 +76,14 @@ rm(wind, freq, windTS)
 
 ######################## Model Building and Forecasting #########################
 
-# Load test and train sets
+# Load test and train sets and set the forecast horizon
 source("scripts/4_1Load.R")
 
 # The "naive" category: Persistence, Mean clima, New Reference, and variations
-# The "econometrics": category: ETS, ARIMA with variations
+source("scripts/4_2NaiveModels.R")
+
+# The "classical" category: ETS and ARIMA with variations
+source("scripts/4_3ClassicalModels.R")
+
 # The STL category: STL-ETS, STL-ARIMA
 # The complex category: Neural Network and TBATS
-source("scripts/4_2NaiveModels.R")

@@ -5,9 +5,6 @@
 #
 # ##############################################################################
 
-# Set forecast horizon h
-horizon <- length(windTestTS)
-
 # Variables to hold the models themeselves are fitName
 # (as in "fitted against the data").
 
@@ -54,6 +51,8 @@ mean <- ts(data = as.vector(forNewRef$mean),
            frequency = 24
            )
 
-forNewRef <- list(dataFrame = forNewRef, mean = mean)
+# Use lower and upper bounds from the mean forecasts, as an indication
+forNewRef <- list(dataFrame = forNewRef, mean = mean,
+                  lower = forMean$lower, upper = forMean$upper)
 
 rm(mean)
