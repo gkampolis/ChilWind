@@ -12,7 +12,7 @@ wind %<>% mutate(year = as.factor(year(dateTime)),
 
 boxPlotMonthOverall <- wind %>%
   ggplot(aes(month, windSpeed)) + geom_boxplot() +
-  theme(axis.title.x=element_blank()) +
+  theme(axis.title.x = element_blank()) +
   labs(y = "Wind speed (m/s)")
 
 boxPlotMonth <- wind %>% filter(year(dateTime) < 2018) %>%

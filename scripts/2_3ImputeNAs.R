@@ -119,7 +119,7 @@ plotNAs <- wind %>% ggplot(aes(x = dateTime, y = windSpeed)) +
        x = "Time",
        colour = "")
 
-plotNAsFocused <- wind[(min(whichNA)-48):(max(whichNA)+48),] %>%
+plotNAsFocused <- wind[(min(whichNA) - 48):(max(whichNA) + 48),] %>%
   ggplot(aes(dateTime, windSpeed)) +
   geom_miss_point() +
   geom_path() +
@@ -135,7 +135,7 @@ plotNAsFocused <- wind[(min(whichNA)-48):(max(whichNA)+48),] %>%
 ## Assign interpolated values to original data frame ##
 wind$windSpeed <- windSpeedTS
 
-plotNAsImputed <- wind[(min(whichNA)-48):(max(whichNA)+48),] %>%
+plotNAsImputed <- wind[(min(whichNA) - 48):(max(whichNA) + 48),] %>%
   ggplot(aes(dateTime, windSpeed)) +
   geom_point(colour = pal_nejm()(2)[2]) +
   geom_path() +
@@ -167,7 +167,7 @@ histWindImputed <- ggplot(wind, aes(x = windSpeed)) +
          " m/s | Mean: ", round(windSummary[4], digits = 2),
          " m/s | 3st Qu.: ", round(windSummary[5], digits = 2),
          " m/s | Max: ", round(windSummary[6], digits = 2),
-         " m/s | NAs: ", if(is.na(windSummary[7])) "0" else windSummary[7]
+         " m/s | NAs: ", if (is.na(windSummary[7])) "0" else windSummary[7]
        )
   )
 

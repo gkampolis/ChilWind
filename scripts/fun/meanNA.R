@@ -6,7 +6,7 @@
 #
 ################################################################################
 
-meanNA <- function (x) {
+meanNA <- function(x) {
   meanValue <- mean(x, na.rm = TRUE)
   return(meanValue)
 }

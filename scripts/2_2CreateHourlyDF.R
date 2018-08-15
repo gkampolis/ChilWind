@@ -22,7 +22,7 @@ source("scripts/fun/meanNA.R")
 
 ## Create *hourly* data set, by computing the mean ##
 n <- 6 * 60 # measurements every 10 secs, 6 values comprise a minute.
-df <- aggregate(df,list(rep(1:(nrow(df)%/%n+1),each=n,len=nrow(df))),meanNA)[-1];
+df <- aggregate(df,list(rep(1:(nrow(df) %/% n + 1),each = n,len = nrow(df))),meanNA)[-1];
 
 dateTime <- seq(ymd_hm("2016-01-01 00:00"),
                 ymd_hm("2018-01-31 23:00"),
