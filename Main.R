@@ -79,8 +79,8 @@ rm(wind, freq, windTS)
 # Load test and train sets
 source("scripts/4_1Load.R")
 
-# The "naive" category: Persistence, Mean climatological
-# The "non-seasonal" category: New Reference, ETS, ARIMA
+# The "naive" category: Persistence, Mean clima, New Reference, and variations
+# The "econometrics": category: ETS, ARIMA with variations
 # The STL category: STL-ETS, STL-ARIMA
 # The complex category: Neural Network and TBATS
 source("scripts/4_2Models.R")
