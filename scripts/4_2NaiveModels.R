@@ -100,4 +100,4 @@ plotNaive <- melt(forNaive, id.vars = "dateTime") %>%
         )
 
 saveA5(plotNaive, "forNaive", "H")
-rm(plotNaive)
+rm(plotNaive, forNaive, accuracyNaive)
