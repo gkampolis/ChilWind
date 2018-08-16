@@ -83,7 +83,9 @@ source("scripts/4_1Load.R")
 source("scripts/4_2NaiveModels.R")
 
 # The "classical" category: ETS and ARIMA with variations
-source("scripts/4_3ClassicalModels.R")
+source("scripts/4_3_1ClassicalModelsTrain.R")
+source("scripts/4_3_2ClassicalModelsForecast.R")
 
-# The STL category: STL-ETS, STL-ARIMA
+# The STL category: STL-naive, STL-ETS, STL-ARIMA
+source("scripts/4_4STLModels.R")
 # The complex category: Neural Network and TBATS

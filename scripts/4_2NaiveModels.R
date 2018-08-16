@@ -22,9 +22,6 @@ forMean <- meanf(windTrainTS, h = horizon)
 # Naive w/ Drift (random walk)
 forDrift <- rwf(windTrainTS, h = horizon, drift = TRUE)
 
-# Seasonal Naive, diurnal only
-forSNaive <- snaive(windTrainTS, h = horizon)
-
 # ######################## New Reference #######################################
 calcACF <- acf(windTrainTS, lag.max = horizon, plot = FALSE)$acf
 
@@ -40,7 +37,7 @@ rm(calcACF)
 forNewRef %<>%
   mutate(ACF = ifelse(calcACF < 0, 0, calcACF),
                       meanTrain = mean(windTrainTS),
-                      lastValueTrain = windTestTS[[length(windTestTS)]],
+                      lastValueTrain = windTrainTS[[length(windTrainTS)]],
                       mean = ACF * lastValueTrain + (1 - ACF) * meanTrain) %>%
   select(mean)
 # forecasts are stored in forNewRed$mean, the choice of "mean" is for
@@ -56,3 +53,51 @@ forNewRef <- list(dataFrame = forNewRef, mean = mean,
                   lower = forMean$lower, upper = forMean$upper)
 
 rm(mean)
+
+
+# ######################## Collect results #####################################
+
+forNaive <- windTest
+forNaive$mean <- forMean$mean
+forNaive$drift <- forDrift$mean
+forNaive$persist <- forPersist$mean
+forNaive$newRef <- forNewRef$mean
+
+rm(forNewRef,forDrift, forMean, forPersist)
+
+accuracyNaive <- as.data.frame(names(forNaive)[3:6])
+names(accuracyNaive) <- "Method"
+temp <- data.frame()
+temp <- as.data.frame(accuracy(forNaive$mean, forNaive$windSpeed))
+temp <- rbind(temp, as.data.frame(accuracy(forNaive$drift, forNaive$windSpeed)))
+temp <- rbind(temp, as.data.frame(accuracy(forNaive$persist, forNaive$windSpeed)))
+temp <- rbind(temp, as.data.frame(accuracy(forNaive$newRef, forNaive$windSpeed)))
+
+accuracyNaive <- cbind(accuracyNaive, temp)
+rownames(accuracyNaive) <- NULL
+rm(temp)
+
+write_delim(forNaive,
+            path = "./results/forecastsNaive.csv",
+            delim = ",")
+
+write_delim(accuracyNaive,
+            path = "./results/accuracyNaive.csv",
+            delim = ",")
+
+plotNaive <- melt(forNaive, id.vars = "dateTime") %>%
+  ggplot(aes(x = dateTime, y = value, colour = variable)) +
+  geom_line() + scale_color_nejm() +
+  labs(subtitle = "Naive models",
+       y = "Wind Speed (m/s)",
+       x = "Time"
+       ) +
+  scale_x_datetime(date_labels = "%d/%m %H:%M") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        axis.title.x = element_blank()
+        )
+
+saveA5(plotNaive, "forNaive", "H")
+rm(plotNaive)

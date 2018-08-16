@@ -11,6 +11,8 @@ library(forecast)
 library(tseries)
 library(readr)
 library(cowplot)
+library(gridExtra)
+library(reshape2)
 # loaded as needed by individual scripts, kept here for reference:
 # library(openair)
 # library(fitdistrplus)
