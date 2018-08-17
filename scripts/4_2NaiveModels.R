@@ -1,7 +1,7 @@
 # ##############################################################################
 # Author: Georgios Kampolis
 #
-# Description: Create the models for forecasting
+# Description: Forecasting by naive models
 #
 # ##############################################################################
 
