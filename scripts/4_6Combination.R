@@ -3,7 +3,7 @@
 #
 # Description: Create a combination model based on the best performing previous
 # model (ETS) and with the only model to have a negative Mean Error, the ETS
-# with 2-parameter Box-Cox transformation.
+# with the 2-parameter Box-Cox transformation.
 #
 # ##############################################################################
 #
@@ -20,11 +20,12 @@ fitETS2BC <- readRDS(file = "models/fitETSBoxCox.RDS")
 # Forecast
 forETS <- fitETS %>% forecast(h = horizon)
 forETS2BC <- fitETS2BC %>% forecast(h = horizon)
+forETS2BC$mean <- forETS2BC$mean - 1
 
 rm(fitETS, fitETS2BC)
 
 # Ensemble
-forCombo <- (0.9 * forETS$mean + 0.1 * forETS2BC$mean)
+forCombo <- (0.5 * forETS$mean + 0.5 * forETS2BC$mean)
 
 # Accuracy
 accuracyCombo <- as.data.frame(accuracy(forCombo, windTestTS)) %>%
