@@ -74,7 +74,7 @@ source("scripts/fun/saveA5.R")
 # Unload data set to make section autonomous
 # rm(wind, freq, windTS)
 
-######################## Model Building and Forecasting #########################
+######################## Model Building and Forecasting ########################
 
 # Load test and train sets and set the forecast horizon
 source("scripts/4_1Load.R")
@@ -92,3 +92,14 @@ source("scripts/4_4STLModels.R")
 # The complex category: Artificial Neural Network and TBATS
 source("scripts/4_5_1ComplexTrain.R")
 source("scripts/4_5_2ComplexForecast.R")
+
+# Ensemble models
+source("scripts/4_6Ensemble.R")
+
+# Clean up objects from 4_1Load.R
+rm(windTest, windTrain,
+   windTestTS, windTrainTS,
+   freq, horizon)
+
+######################## Clean up custom functions #############################
+rm(saveA5, select)
