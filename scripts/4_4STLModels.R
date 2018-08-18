@@ -19,6 +19,34 @@ forSTLNBoxCoxAuto <- stlf(windTrainTS, h = horizon,
 forSTLNBoxCox <- stlf(windTrainTS + 1, h = horizon, method = "naive", lambda = 0)
 forSTLNBoxCox$mean <- forSTLNBoxCox$mean - 1
 
+# Accuracy
+
+accuracySTLN <- as.data.frame(accuracy(forSTLN, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLN,
+            path = "./results/accuracySTLN.csv",
+            delim = ",")
+
+rm(accuracySTLN)
+
+accuracySTLN_BC_Auto <- as.data.frame(accuracy(forSTLNBoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLN_BC_Auto,
+            path = "./results/accuracySTLN_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracySTLN_BC_Auto)
+
+accuracySTLN_BC <- as.data.frame(accuracy(forSTLNBoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLN_BC,
+            path = "./results/accuracySTLN_BC.csv",
+            delim = ",")
+
+rm(accuracySTLN_BC)
 
 # ######################## STL-ETS forecasts ###################################
 
@@ -33,6 +61,35 @@ forSTLETSBoxCoxAuto <- stlf(windTrainTS, h = horizon,
 forSTLETSBoxCox <- stlf(windTrainTS + 1, h = horizon, method = "ets", lambda = 0)
 forSTLETSBoxCox$mean <- forSTLETSBoxCox$mean - 1
 
+# Accuracy
+
+accuracySTLETS <- as.data.frame(accuracy(forSTLETS, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLETS,
+            path = "./results/accuracySTLETS.csv",
+            delim = ",")
+
+rm(accuracySTLETS)
+
+accuracySTLETS_BC_Auto <- as.data.frame(accuracy(forSTLETSBoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLETS_BC_Auto,
+            path = "./results/accuracySTLETS_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracySTLETS_BC_Auto)
+
+accuracySTLETS_BC <- as.data.frame(accuracy(forSTLETSBoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLETS_BC,
+            path = "./results/accuracySTLETS_BC.csv",
+            delim = ",")
+
+rm(accuracySTLETS_BC)
+
 # ######################## STL-ARIMA forecasts #################################
 
 # ARIMA(0,1,3)
@@ -46,6 +103,36 @@ forSTLARIMABoxCoxAuto <- stlf(windTrainTS, h = horizon,
 forSTLARIMABoxCox <- stlf(windTrainTS + 1, h = horizon, method = "arima", lambda = 0)
 forSTLARIMABoxCox$mean <- forSTLARIMABoxCox$mean - 1
 
+# Accuracy
+
+accuracySTLARIMA <- as.data.frame(accuracy(forSTLARIMA, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLARIMA,
+            path = "./results/accuracySTLARIMA.csv",
+            delim = ",")
+
+rm(accuracySTLARIMA)
+
+accuracySTLARIMA_BC_Auto <- as.data.frame(accuracy(forSTLARIMABoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLARIMA_BC_Auto,
+            path = "./results/accuracySTLARIMA_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracySTLARIMA_BC_Auto)
+
+accuracySTLARIMA_BC <- as.data.frame(accuracy(forSTLARIMABoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySTLARIMA_BC,
+            path = "./results/accuracySTLARIMA_BC.csv",
+            delim = ",")
+
+rm(accuracySTLARIMA_BC)
+
+
 # ######################## Collect results #####################################
 
 # STL + Naive
@@ -55,8 +142,6 @@ forSTLnaive$STLN <- forSTLN$mean
 forSTLnaive$STLN_BC_Auto <- forSTLNBoxCoxAuto$mean
 forSTLnaive$STLN_BC <- forSTLNBoxCox$mean
 
-rm(forSTLN, forSTLNBoxCoxAuto, forSTLNBoxCox)
-
 # STL + ETS
 
 forSTLets <- windTest
@@ -64,16 +149,12 @@ forSTLets$STLETS <- forSTLETS$mean
 forSTLets$STLETS_BC_Auto <- forSTLETSBoxCoxAuto$mean
 forSTLets$STLETS_BC <- forSTLETSBoxCox$mean
 
-rm(forSTLETS, forSTLETSBoxCoxAuto, forSTLETSBoxCox)
-
 # STL + ARIMA
 
 forSTLarima <- windTest
 forSTLarima$STLARIMA <- forSTLARIMA$mean
 forSTLarima$STLARIMA_BC_Auto <- forSTLARIMABoxCoxAuto$mean
 forSTLarima$STLARIMA_BC <- forSTLARIMABoxCox$mean
-
-rm(forSTLARIMA, forSTLARIMABoxCoxAuto, forSTLARIMABoxCox)
 
 write_delim(forSTLnaive,
             path = "./results/forecastsSTLnaive.csv",
@@ -87,88 +168,10 @@ write_delim(forSTLarima,
             path = "./results/forecastsSTLarima.csv",
             delim = ",")
 
-
-# Accuracy STL + Naive
-
-accuracySTLnaive <- as.data.frame(names(forSTLnaive)[3:5])
-names(accuracySTLnaive) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forSTLnaive$STLN, forSTLnaive$windSpeed))
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLnaive$STLN_BC_Auto, forSTLnaive$windSpeed
-                         )
-                )
-              )
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLnaive$STLN_BC, forSTLnaive$windSpeed
-                         )
-                )
-              )
-
-accuracySTLnaive <- cbind(accuracySTLnaive, temp)
-rownames(accuracySTLnaive) <- NULL
-rm(temp)
-
-# Accuracy STL + ETS
-
-accuracySTLets <- as.data.frame(names(forSTLets)[3:5])
-names(accuracySTLets) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forSTLets$STLETS, forSTLets$windSpeed))
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLets$STLETS_BC_Auto, forSTLets$windSpeed
-                         )
-                )
-              )
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLets$STLETS_BC, forSTLets$windSpeed
-                         )
-                )
-              )
-
-accuracySTLets <- cbind(accuracySTLets, temp)
-rownames(accuracySTLets) <- NULL
-rm(temp)
-
-
-# Accuracy STL + ARIMA
-
-accuracySTLarima <- as.data.frame(names(forSTLarima)[3:5])
-names(accuracySTLarima) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forSTLarima$STLARIMA, forSTLarima$windSpeed))
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLarima$STLARIMA_BC_Auto, forSTLarima$windSpeed
-                )
-              )
+rm(forSTLN, forSTLNBoxCoxAuto, forSTLNBoxCox,
+   forSTLETS, forSTLETSBoxCoxAuto, forSTLETSBoxCox,
+   forSTLARIMA, forSTLARIMABoxCoxAuto, forSTLARIMABoxCox
 )
-temp <- rbind(temp,
-              as.data.frame(
-                accuracy(forSTLarima$STLARIMA_BC, forSTLarima$windSpeed
-                )
-              )
-)
-
-accuracySTLarima <- cbind(accuracySTLarima, temp)
-rownames(accuracySTLarima) <- NULL
-rm(temp)
-
-write_delim(accuracySTLnaive,
-            path = "./results/accuracySTLnaive.csv",
-            delim = ",")
-
-write_delim(accuracySTLets,
-            path = "./results/accuracySTLets.csv",
-            delim = ",")
-
-write_delim(accuracySTLarima,
-            path = "./results/accuracySTLarima.csv",
-            delim = ",")
 
 # Plots
 plotSTLnaive <- melt(forSTLnaive, id.vars = "dateTime") %>%
@@ -219,5 +222,4 @@ saveA5(plotSTLets, "forSTLets", "H")
 saveA5(plotSTLarima, "forSTLarima", "H")
 
 rm(plotSTLnaive, plotSTLets, plotSTLarima,
-   accuracySTLnaive, accuracySTLets, accuracySTLarima,
    forSTLnaive, forSTLets, forSTLarima)

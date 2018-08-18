@@ -19,8 +19,37 @@ forPersist <- naive(windTrainTS, h = horizon)
 # Mean (climatological)
 forMean <- meanf(windTrainTS, h = horizon)
 
-# Naive w/ Drift (random walk)
+# Drift (random walk)
 forDrift <- rwf(windTrainTS, h = horizon, drift = TRUE)
+
+# Accuracy
+accuracyPersist <- as.data.frame(accuracy(forPersist, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyPersist,
+            path = "./results/accuracyPersist.csv",
+            delim = ",")
+
+rm(accuracyPersist)
+
+accuracyMean <- as.data.frame(accuracy(forMean, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyMean,
+            path = "./results/accuracyMean.csv",
+            delim = ",")
+
+rm(accuracyMean)
+
+accuracyDrift <- as.data.frame(accuracy(forDrift, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyDrift,
+            path = "./results/accuracyDrift.csv",
+            delim = ",")
+
+rm(accuracyDrift)
+
 
 # ######################## New Reference #######################################
 calcACF <- acf(windTrainTS, lag.max = horizon, plot = FALSE)$acf
@@ -45,7 +74,8 @@ forNewRef %<>%
 
 # Create TS object from data frame (as the forecast package) and clean up
 mean <- ts(data = as.vector(forNewRef$mean),
-           frequency = 24
+           frequency = 24,
+           start = c(746,1)
            )
 
 # Use lower and upper bounds from the mean forecasts, as an indication
@@ -54,6 +84,15 @@ forNewRef <- list(dataFrame = forNewRef, mean = mean,
 
 rm(mean)
 
+# Accuracy
+accuracyNewRef <- as.data.frame(accuracy(forNewRef$mean, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyNewRef,
+            path = "./results/accuracyNewRef.csv",
+            delim = ",")
+
+rm(accuracyNewRef)
 
 # ######################## Collect results #####################################
 
@@ -65,25 +104,11 @@ forNaive$newRef <- forNewRef$mean
 
 rm(forNewRef,forDrift, forMean, forPersist)
 
-accuracyNaive <- as.data.frame(names(forNaive)[3:6])
-names(accuracyNaive) <- "Method"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forNaive$mean, forNaive$windSpeed))
-temp <- rbind(temp, as.data.frame(accuracy(forNaive$drift, forNaive$windSpeed)))
-temp <- rbind(temp, as.data.frame(accuracy(forNaive$persist, forNaive$windSpeed)))
-temp <- rbind(temp, as.data.frame(accuracy(forNaive$newRef, forNaive$windSpeed)))
-
-accuracyNaive <- cbind(accuracyNaive, temp)
-rownames(accuracyNaive) <- NULL
-rm(temp)
-
 write_delim(forNaive,
             path = "./results/forecastsNaive.csv",
             delim = ",")
 
-write_delim(accuracyNaive,
-            path = "./results/accuracyNaive.csv",
-            delim = ",")
+# Plot
 
 plotNaive <- melt(forNaive, id.vars = "dateTime") %>%
   ggplot(aes(x = dateTime, y = value, colour = variable)) +
@@ -100,4 +125,5 @@ plotNaive <- melt(forNaive, id.vars = "dateTime") %>%
         )
 
 saveA5(plotNaive, "forNaive", "H")
-rm(plotNaive, forNaive, accuracyNaive)
+
+rm(plotNaive, forNaive)

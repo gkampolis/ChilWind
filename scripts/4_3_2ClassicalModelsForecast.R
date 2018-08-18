@@ -30,6 +30,38 @@ fitETSBoxCox <- readRDS(file = "models/fitETSBoxCox.RDS")
 forETS <- fitETS %>% forecast(h = horizon)
 forETSBoxCoxAuto <- fitETSBoxCoxAuto %>% forecast(h = horizon)
 forETSBoxCox <- fitETSBoxCox %>% forecast(h = horizon)
+forETSBoxCox$mean <- forETSBoxCox$mean - 1
+
+# Accuracy
+
+accuracyETS <- as.data.frame(accuracy(forETS, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyETS,
+            path = "./results/accuracyETS.csv",
+            delim = ",")
+
+rm(accuracyETS)
+
+accuracyETS_BC_Auto <- as.data.frame(accuracy(forETSBoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyETS_BC_Auto,
+            path = "./results/accuracyETS_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracyETS_BC_Auto)
+
+accuracyETS_BC <- as.data.frame(accuracy(forETSBoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyETS_BC,
+            path = "./results/accuracyETS_BC.csv",
+            delim = ",")
+
+rm(accuracyETS_BC)
+
+rm(fitETS, fitETSBoxCoxAuto, fitETSBoxCox)
 
 # ######################## sARIMA models #######################################
 
@@ -49,6 +81,38 @@ fitSARIMABoxCox <- readRDS(file = "models/fitSARIMABoxCox.RDS")
 forSARIMA <- fitSARIMA %>% forecast(h = horizon)
 forSARIMABoxCoxAuto <- fitSARIMABoxCoxAuto %>% forecast(h = horizon)
 forSARIMABoxCox <- fitSARIMABoxCox %>% forecast(h = horizon)
+forSARIMABoxCox$mean <- forSARIMABoxCox$mean - 1
+
+# Accuracy
+
+accuracySARIMA <- as.data.frame(accuracy(forSARIMA, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySARIMA,
+            path = "./results/accuracySARIMA.csv",
+            delim = ",")
+
+rm(accuracySARIMA)
+
+accuracySARIMA_BC_Auto <- as.data.frame(accuracy(forSARIMABoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySARIMA_BC_Auto,
+            path = "./results/accuracySARIMA_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracySARIMA_BC_Auto)
+
+accuracySARIMA_BC <- as.data.frame(accuracy(forSARIMABoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracySARIMA_BC,
+            path = "./results/accuracySARIMA_BC.csv",
+            delim = ",")
+
+rm(accuracySARIMA_BC)
+
+rm(fitSARIMA, fitSARIMABoxCoxAuto, fitSARIMABoxCox)
 
 # ######################## ARIMA models ########################################
 
@@ -68,6 +132,38 @@ fitARIMABoxCox <- readRDS(file = "models/fitARIMABoxCox.RDS")
 forARIMA <- fitARIMA %>% forecast(h = horizon)
 forARIMABoxCoxAuto <- fitARIMABoxCoxAuto %>% forecast(h = horizon)
 forARIMABoxCox <- fitARIMABoxCox %>% forecast(h = horizon)
+forARIMABoxCox$mean <- forARIMABoxCox$mean - 1
+
+# Accuracy
+
+accuracyARIMA <- as.data.frame(accuracy(forARIMA, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyARIMA,
+            path = "./results/accuracyARIMA.csv",
+            delim = ",")
+
+rm(accuracyARIMA)
+
+accuracyARIMA_BC_Auto <- as.data.frame(accuracy(forARIMABoxCoxAuto, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyARIMA_BC_Auto,
+            path = "./results/accuracyARIMA_BC_Auto.csv",
+            delim = ",")
+
+rm(accuracyARIMA_BC_Auto)
+
+accuracyARIMA_BC <- as.data.frame(accuracy(forARIMABoxCox, windTestTS)) %>%
+  select(ME, RMSE, MAE, MPE, MAPE)
+
+write_delim(accuracyARIMA_BC,
+            path = "./results/accuracyARIMA_BC.csv",
+            delim = ",")
+
+rm(accuracyARIMA_BC)
+
+rm(fitARIMA, fitARIMABoxCoxAuto, fitARIMABoxCox)
 
 # ######################## Collect results #####################################
 
@@ -76,19 +172,25 @@ forARIMABoxCox <- fitARIMABoxCox %>% forecast(h = horizon)
 forClassicETS <- windTest
 forClassicETS$ETS <- forETS$mean
 forClassicETS$ETS_BC_Auto <- forETSBoxCoxAuto$mean
-forClassicETS$ETS_BC <- forETSBoxCox$mean - 1
+forClassicETS$ETS_BC <- forETSBoxCox$mean
+
+rm(forETS, forETSBoxCoxAuto, forETSBoxCox)
 
 # sARIMA
 forClassicSARIMA <- windTest
 forClassicSARIMA$SARIMA <- forSARIMA$mean
 forClassicSARIMA$SARIMA_BC_Auto <- forSARIMABoxCoxAuto$mean
-forClassicSARIMA$SARIMA_BC <- forSARIMABoxCox$mean - 1
+forClassicSARIMA$SARIMA_BC <- forSARIMABoxCox$mean
+
+rm(forSARIMA, forSARIMABoxCoxAuto, forSARIMABoxCox)
 
 # ARIMA
 forClassicARIMA <- windTest
 forClassicARIMA$ARIMA <- forARIMA$mean
 forClassicARIMA$ARIMA_BC_Auto <- forARIMABoxCoxAuto$mean
-forClassicARIMA$ARIMA_BC <- forARIMABoxCox$mean - 1
+forClassicARIMA$ARIMA_BC <- forARIMABoxCox$mean
+
+rm(forARIMA, forARIMABoxCoxAuto, forARIMABoxCox)
 
 write_delim(forClassicETS,
             path = "./results/forecastsClassicETS.csv",
@@ -102,56 +204,6 @@ write_delim(forClassicARIMA,
             path = "./results/forecastsClassicARIMA.csv",
             delim = ",")
 
-# Accuracy ETS
-
-accuracyClassicETS <- as.data.frame(names(forClassicETS)[3:5])
-names(accuracyClassicETS) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forClassicETS$ETS, forClassicETS$windSpeed))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicETS$ETS_BC_Auto, forClassicETS$windSpeed)))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicETS$ETS_BC, forClassicETS$windSpeed)))
-
-accuracyClassicETS <- cbind(accuracyClassicETS, temp)
-rownames(accuracyClassicETS) <- NULL
-rm(temp)
-
-# Accuracy sARIMA
-
-accuracyClassicSARIMA <- as.data.frame(names(forClassicSARIMA)[3:5])
-names(accuracyClassicSARIMA) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forClassicSARIMA$SARIMA, forClassicSARIMA$windSpeed))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicSARIMA$SARIMA_BC_Auto, forClassicSARIMA$windSpeed)))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicSARIMA$SARIMA_BC, forClassicSARIMA$windSpeed)))
-
-accuracyClassicSARIMA <- cbind(accuracyClassicSARIMA, temp)
-rownames(accuracyClassicSARIMA) <- NULL
-rm(temp)
-
-# Accuracy ARIMA
-
-accuracyClassicARIMA <- as.data.frame(names(forClassicARIMA)[3:5])
-names(accuracyClassicARIMA) <- "Model"
-temp <- data.frame()
-temp <- as.data.frame(accuracy(forClassicARIMA$ARIMA, forClassicARIMA$windSpeed))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicARIMA$ARIMA_BC_Auto, forClassicARIMA$windSpeed)))
-temp <- rbind(temp, as.data.frame(accuracy(forClassicARIMA$ARIMA_BC, forClassicARIMA$windSpeed)))
-
-accuracyClassicARIMA <- cbind(accuracyClassicARIMA, temp)
-rownames(accuracyClassicARIMA) <- NULL
-rm(temp)
-
-write_delim(accuracyClassicETS,
-            path = "./results/accuracyClassicETS.csv",
-            delim = ",")
-
-write_delim(accuracyClassicSARIMA,
-            path = "./results/accuracyClassicSARIMA.csv",
-            delim = ",")
-
-write_delim(accuracyClassicARIMA,
-            path = "./results/accuracyClassicARIMA.csv",
-            delim = ",")
 
 # Plots
 plotClassicETS <- melt(forClassicETS, id.vars = "dateTime") %>%
@@ -201,10 +253,5 @@ saveA5(plotClassicSARIMA, "forClassicSARIMA", "H")
 saveA5(plotClassicARIMA, "forClassicARIMA", "H")
 
 # Clean Up
-rm(plotClassicETS, plotClassicARIMA, plotClassicSARIMA, fitARIMA,
-   fitARIMABoxCoxAuto, fitARIMABoxCox, fitETS, fitETSBoxCoxAuto,
-   fitETSBoxCox, fitSARIMA, fitSARIMABoxCoxAuto, fitSARIMABoxCox,
-   forARIMA, forARIMABoxCoxAuto, forARIMABoxCox, forETS,
-   forETSBoxCoxAuto, forETSBoxCox, forSARIMA, forSARIMABoxCoxAuto,
-   forSARIMABoxCox, forClassicARIMA, forClassicETS, forClassicSARIMA,
-   accuracyClassicARIMA, accuracyClassicETS, accuracyClassicSARIMA)
+rm(plotClassicETS, plotClassicARIMA, plotClassicSARIMA,
+   forClassicETS, forClassicARIMA, forClassicSARIMA)
