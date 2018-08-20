@@ -93,8 +93,8 @@ source("scripts/4_4STLModels.R")
 source("scripts/4_5_1ComplexTrain.R")
 source("scripts/4_5_2ComplexForecast.R")
 
-# Ensemble models
-source("scripts/4_6Ensemble.R")
+# Combination models
+source("scripts/4_6Combination.R")
 
 # Clean up objects from 4_1Load.R
 rm(windTest, windTrain,

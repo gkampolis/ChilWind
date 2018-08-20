@@ -25,7 +25,7 @@ forETS2BC$mean <- forETS2BC$mean - 1
 rm(fitETS, fitETS2BC)
 
 # Ensemble
-forCombo <- (0.5 * forETS$mean + 0.5 * forETS2BC$mean)
+forCombo <- (0.75 * forETS$mean + 0.25 * forETS2BC$mean)
 
 # Accuracy
 accuracyCombo <- as.data.frame(accuracy(forCombo, windTestTS)) %>%
