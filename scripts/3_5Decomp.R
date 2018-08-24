@@ -13,21 +13,22 @@ saveA5(STLdecomp, "STL", "H")
 
 rm(STLdecomp)
 
-STLdecompBoxCox <- autoplot(mstl(BoxCox(windTS + 1, lambda = 0))) +
-  labs(subtitle = "Transformed data decomposition by STL",
+STLdecompBoxCox <- autoplot(mstl(
+  msts(BoxCox(windTS, lambda = "auto"),freq, ts.frequency = freq[1])
+  )) +
+  labs(subtitle = "Data decomposition by STL & Box-Cox",
        x = "Time (days)")
 
-saveA5(STLdecompBoxCox, "STL_BoxCox", "H")
+saveA5(STLdecompBoxCox, "STL_BoxCox_Auto", "H")
 
 rm(STLdecompBoxCox)
 
 fitTBATS <- tbats(windTS, use.box.cox = FALSE, use.arma.errors = TRUE)
 
-png(file = "./plots/TBATS.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
+pdf(file = "./plots/TBATS.pdf",
+    width = 8.3, # 21cm in inches
+    height = 5.8 # 14.8 cm in inches
+)
 
 print(
       plot(fitTBATS, main = "Data decomposition by TBATS", xlab = "Time (Days)")
@@ -42,35 +43,20 @@ fitTBATSBoxAuto <- tbats(windTS,
                   use.arma.errors = TRUE,
                   biasadj = TRUE)
 
-png(file = "./plots/TBATS_BoxCox_Auto.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
+pdf(file = "./plots/TBATS_BoxCox_Auto.pdf",
+    width = 8.3, # 21cm in inches
+    height = 5.8 # 14.8 cm in inches
+)
 
 print(
-  plot(fitTBATSBoxAuto, main = "Data decomposition by TBATS", xlab = "Time (Days)")
+  plot(fitTBATSBoxAuto,
+       main = "Data decomposition by TBATS & Box-Cox",
+       xlab = "Time (Days)")
 )
 
 dev.off()
 
 rm(fitTBATSBoxAuto)
-
-fitTBATSBox <- tbats(BoxCox(windTS + 1, lambda = 0), use.box.cox = FALSE)
-png(file = "./plots/TBATS_BoxCox.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
-
-print(
-  plot(fitTBATSBox, main = "Transformed data decomposition by TBATS",
-       xlab = "Time (Days)")
-  )
-
-dev.off()
-
-rm(fitTBATSBox)
 
 ## Notify that script's end has been reached ##
 if (require(beepr)) {beepr::beep(1)}

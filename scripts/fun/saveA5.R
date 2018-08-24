@@ -9,7 +9,7 @@
 
 require(ggplot2)
 
-saveA5 <- function(plotObject, plotName, orientation = "H", fileType = ".png") {
+saveA5 <- function(plotObject, plotName, orientation = "H", fileType = ".pdf") {
   if (orientation == "H" || orientation == "h") {  # horizontal orientation
     ggplot2::ggsave(paste0(plotName, fileType),
            plot = plotObject,

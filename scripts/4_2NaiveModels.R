@@ -109,7 +109,6 @@ write_delim(forNaive,
             delim = ",")
 
 # Plot
-
 plotNaive <- melt(forNaive, id.vars = "dateTime") %>%
   ggplot(aes(x = dateTime, y = value, colour = variable)) +
   geom_line() + scale_color_nejm() +

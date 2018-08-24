@@ -42,7 +42,7 @@ boxPlotHourByMonth <- wind %>%
   labs(y = "Wind speed (m/s)",
        x = "Hours")
 
-ggsave("BoxPlotHourByMonth.png", plot = boxPlotHourByMonth, path = "plots/",
+ggsave("BoxPlotHourByMonth.pdf", plot = boxPlotHourByMonth, path = "plots/",
        units = "cm",
        width = 29.7,
        height = 21,

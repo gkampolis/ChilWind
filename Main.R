@@ -32,47 +32,47 @@ source("scripts/fun/saveA5.R")
 # creating the csv but before proceeding, due to ncdf4 not clossing the
 # connection to the .nc files properly (they're still loaded and used by the R
 # process).
-# source("scripts/2_1LoadNC.R)
+source("scripts/2_1LoadNC.R")
 
 
 # Loads the data set, and creates hourly values by aggregating means (by
 # utilizing na.rm=TRUE option of the mean() function).
 # Resulting data set still has NAs, for the cases where the vector passed
 # to mean() is comprised entirely by NAs.
-# source("scripts/2_2CreateHourlyDF.R)
+source("scripts/2_2CreateHourlyDF.R")
 
 # Loads the hourly data set, splits into training and test sets and
 # imputes NAs in the training set by linear interpolationand taking
 # into account seasonality by robust STL decomposition.
 # Also creates relevant plots by loading the original set and showing both the
 # effects of hourly conversion and of the imputation.
-# source("scripts/2_3Impute_NAs.R")
+source("scripts/2_3Impute_NAs.R")
 
 ########################## Exploratory Data Analysis ###########################
 
 # Create wind roses plot
-# source("scripts/3_1WindRoses.R")
+source("scripts/3_1WindRoses.R")
 
 # Load the data set to be used throughout EDA, in data frame and msts objects.
-# source("scripts/3_2EDAload.R")
+source("scripts/3_2EDAload.R")
 
 # Create initial box plots, to explore seasonality
-# source("scripts/3_3EDABoxPlot.R")
+source("scripts/3_3EDABoxPlot.R")
 
 # Compare Box-Cox transformation options
-# source("scripts/3_4BoxCox.R")
+source("scripts/3_4BoxCox.R")
 
 # Explore decomposition methods options
-# source("scripts/3_5Decomp.R")
+source("scripts/3_5Decomp.R")
 
 # ACF and PACF plots
-# source("scripts/3_6ACF.R")
+source("scripts/3_6ACF.R")
 
 # Explore the effects of differencing.
-# source("scripts/3_7Diff.R")
+source("scripts/3_7Diff.R")
 
 # Unload data set to make section autonomous
-# rm(wind, freq, windTS)
+rm(wind, freq, windTS)
 
 ######################## Model Building and Forecasting ########################
 

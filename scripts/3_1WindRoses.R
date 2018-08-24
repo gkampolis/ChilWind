@@ -39,45 +39,49 @@ windRoseSeason <- windRose(windInitial, ws = "windSpeed", wd = "windDirection",
                           annotate = "",
                           type = "season")
 
-windRoseMonth <- windRose(windInitial, ws = "windSpeed", wd = "windDirection",
-                           key.position = "right",
-                           key.header = "Wind speed (m / s)",
-                           annotate = "",
-                           type = "month")
 
-# To be touched up in vector program later for the final publication
-png(file = "./plots/windRoseTotal.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
+# PDF export
+pdf(file = "./plots/windRoseTotal.pdf",
+    width = 8.3, # 21cm in inches
+    height = 5.8 # 14.8 cm in inches
+    )
 
 print(windRoseTotal)
 
 dev.off()
 
-png(file = "./plots/windRoseSeason.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
+pdf(file = "./plots/windRoseSeason.pdf",
+    width = 8.3, # 21cm in inches
+    height = 5.8 # 14.8 cm in inches
+)
 
-print(windRoseSeason)
-
-dev.off()
-
-png(file = "./plots/windRoseMonth.png",
-    units = "cm",
-    res = 300,
-    width = 21,
-    height = 14.8)
-
-print(windRoseMonth)
+print(windRoseTotal)
 
 dev.off()
+
+# PNG export
+# png(file = "./plots/windRoseTotal.png",
+#     units = "cm",
+#     res = 300,
+#     width = 21,
+#     height = 14.8)
+#
+# print(windRoseTotal)
+#
+# dev.off()
+#
+# png(file = "./plots/windRoseSeason.png",
+#     units = "cm",
+#     res = 300,
+#     width = 21,
+#     height = 14.8)
+#
+# print(windRoseSeason)
+#
+# dev.off()
 
 ## clean up ##
-rm(windRoseMonth, windRoseSeason, windRoseTotal, windInitial)
+rm(windRoseSeason, windRoseTotal, windInitial)
 
 detach(package:openair, unload = TRUE)
 
