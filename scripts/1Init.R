@@ -1,5 +1,11 @@
-## Loads the libraries needed, sets default ggplot2 theme and ##
-## explicitly states that dplyr::select() takes precedence. ##
+# ##############################################################################
+# Author: Georgios Kampolis
+#
+# Description: Loads the libraries needed, sets default ggplot2 theme and
+# explicitly states that dplyr::select() takes precedence.
+#
+# ##############################################################################
+
 library(dplyr)
 library(magrittr)
 library(ggplot2)
