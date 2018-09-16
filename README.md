@@ -50,13 +50,15 @@ Drift model (equivalent to drawing a line between first and last observations an
 
 The wind speed data used in this project has been collected at a height of 10m at Chilbolton, from Jan 1st 2016 to Jan 31st 2018 and was converted to an hourly data set. The last 48 hours constitute the test set. The box plots below highlight the annual and diurnal seasonalities present in the data (as expected) while the histogram & density plot illustrate the skewed distribution of wind speeds (a typical feature of most regions’ wind regimes). The AutoCorellation Function plot confirms the existence of both trend and seasonality in the data, but the trend is of marginal impact, as identified by STL decomposition.
 
-![Density Plot](https://1drv.ms/u/s!Ai_AHTr3E-06gfBhMW0T4lI4GxPFgg)
+![Density Plot](https://5etpra.db.files.1drv.com/y4msNWQNA_dkh0S0yx6blyGlWIG1Y0ImTX9pQ2qskut4qEIsOHp62izmLxHhvIrECBcb9dmVmWewqAHdM8Gi-2BWkkvVRskD2TDSYJLQwgNVmE1I3yxc1b0lpOxnpiNXRNS5pj083s4iYStCODOaAQp4aIoAApf6bMPxcn62pgL4ywLrD16hE97k4pjlQwW5ntBDnRm5S55Vf9v416h8QZ2GQ?width=660&height=161&cropmode=none)
 
-![Box plot per hour](https://1drv.ms/u/s!Ai_AHTr3E-06gdlZEzK7Ptxcx2A05w)
+![Box plot per hour](https://fuerxa.db.files.1drv.com/y4mmn5hW3N1lfVUluLDSA7bQDuiORucLqK3FJzP6wDnkyQSi4du6POw0GLtpew32v942vGwBdS8zxa74-tX9qQ-ckA8Y-XS2AvjOJSfxONcizjIHePOPKn64RrPxIttmz5yPXRCen7PPrHc8rq4O-OLbWiEdoGwXF53FsueZMiGR3fiTXE79ugtpVENYh5d5oGqZv7N4ffCG59yxtT2IUGGyg?width=660&height=465&cropmode=none)
 
-![Box plot per month](https://1drv.ms/u/s!Ai_AHTr3E-06gdlUuddeo88Fa8ZNqg)
+![Box plot per month](https://fuemxa.db.files.1drv.com/y4mx4ocgifXQB5mrotNiEA7MofAT3t9yYuPvGBe_eG2dtkUFlWsn3Pkkaia8LjLkI8f7MlTELfAvAfzqCO5FpcbEKpm8AYIhe4MHxo3qKZwyQ0W0qxUXAIE26Lono6Ev6BCa2YR1z-OMzCdynMi6ks2VrAo4iheHvOm59MHFuC_M0YJwMYuPGKAwK-5qIc29SVHrDHlnJrS5mYYRYRXJXCiZQ?width=660&height=465&cropmode=none)
 
-![ACF plot](https://1drv.ms/u/s!Ai_AHTr3E-06gdlgfAp-RtLeXgeEuQ)
+![ACF plot](https://feeoxa.db.files.1drv.com/y4mbedmdl5ClDcizm-qEd0nbWTIScMXH1cESNQ9D5YLpGNu2iSVsup3_HLoZNUyQs1oOEDRlcIYra8mZNnk_RqNd9BZGfnKnAYX_x-McEpZriVInHeJkdTncn_lZJcJOlIcYN4mOQnpDtATMXucRFRQhl3IqDiTb4-3WPjMeSPjfIIPXHDHJ-9oF6Sv8EhBEcMaFnnDm2jZZFYpbAzoHZr3sA?width=660&height=465&cropmode=none)
+
+![STL decomposition](https://goeqxa.db.files.1drv.com/y4m0nU-baMeAuYMj9bXjgdJo-O92kL2ALG2Q08mEIAOQcSkGfTlcl6wZDa6l7o0hVLDCYU2ha5Koyb3_bD4aknwm16kk1fr_4PCgc4rQYfK29lbNXt2QNNgqw3SFhwrt-wyJLs8_jF02AfRKlBcjh6BPd38k2Ts7C8jRaaYHTVJY2VxPO7MLfQAaLqRt3rsKiwWuRswIR-Fs-_sPeUDRCqqGA?width=660&height=465&cropmode=none)
 
 ### Statistical Forecasting Results
 
@@ -70,7 +72,7 @@ Four methods outperformed the benchmark of Persistence and only ETS significantl
 | Drift       | 1.02 | 1.58 | 1.27 | 16.80 | 0.27%    | 0.19%     |
 | Persistence | 1.02 | 1.58 | 1.27 | 16.84 | 0.00%    | 0.00%     |
 
-![5 Best Methods](https://1drv.ms/u/s!Ai_AHTr3E-06gfBidYqrHe8dD6rKCg)
+![5 Best Methods](https://5etsra.db.files.1drv.com/y4m8xsFKHYFJ5u0o8BuVcannVy8ff2D-XONASdaa7xcHGsozVEYcS8ozb3fjhSpV3NmaMuwpl7z6hvGM2S3gy_haRVoHSN1whYWEHzbhnf_nEFY3VDFAAUvG7HjODyVHwy7w1X0SYf8-cHrSH_i9P05auanRU_HzsptUD15xyqKsQ5Dz4_kgWXhcA5mqflKqpiGc-CxRcU6EXq2jD1lxjZ7cg?width=660&height=648&cropmode=none)
 
 None of the methods managed to capture the “ramp” event at the start of the forecasting period, suggesting that a sub-hourly approach may be needed. Furthermore, the Drift method performed marginally better than Persistence. The lowest MAE in the training set was achieved by STL approaches which include Annual and Diurnal seasonality. They subsequently performed very poorly for forecasting, suggesting that good fit in the training set is not indication of performance and that including annual seasonality may lead to overfitting. Data pre-processing/transformations hindered the forecasting ability of the models universally. 
 
