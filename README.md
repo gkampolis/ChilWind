@@ -1,5 +1,5 @@
 # ChilWind: Forecasting wind speeds at Chilbolton, UK.
-A repository to host the data analysis required for my MSc project for Renewable Energy and Environmental Modelling at the University of Dundee. Released under the [MIT License](https://github.com/gkampolis/Chilbolton/blob/master/LICENSE.md). A full write-up is coming soon. Easiest way to replicate the analysis is to open Rstudio by double-clicking the `ChilWind.Rproj` and then go through the `Main.R` script.
+A repository to host the data analysis required for my MSc project for Renewable Energy and Environmental Modelling at the University of Dundee. Released under the [MIT License](https://github.com/gkampolis/Chilbolton/blob/master/LICENSE.md). A full write-up is coming soon. Easiest way to replicate the analysis is to open Rstudio by double-clicking the `ChilWind.Rproj` and then go through the `Main.R` script. Small tweaks are still needed here and there, but this is close to final.
 
 ## Data Provenance
 
