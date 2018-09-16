@@ -48,7 +48,7 @@ Drift model (equivalent to drawing a line between first and last observations an
 
 ### Data Exploration
 
-The wind speed data used in this project has been collected at a height of 10m at Chilbolton, from Jan 1st 2016 to Jan 31st 2018 and was converted to an hourly data set. The last 48 hours constitute the test set. The box plots below highlight the annual and diurnal seasonalities present in the data (as expected) while the histogram & density plot illustrate the skewed distribution of wind speeds (a typical feature of most regions’ wind regimes). The AutoCorellation Function plot confirms the existence of both trend and seasonality in the data, but the trend is of marginal impact, as identified by STL decomposition.
+The wind speed data used in this project has been collected at a height of 10m at Chilbolton, from Jan 1st 2016 to Jan 17th 2018 (inclusive) and was converted to an hourly data set. The last 48 hours constitute the test set. The box plots below highlight the annual and diurnal seasonalities present in the data (as expected) while the histogram & density plot illustrate the skewed distribution of wind speeds (a typical feature of most regions’ wind regimes). The AutoCorellation Function plot confirms the existence of both trend and seasonality in the data, but the trend is of marginal impact, as identified by STL decomposition.
 
 ![Density Plot](https://5etpra.db.files.1drv.com/y4msNWQNA_dkh0S0yx6blyGlWIG1Y0ImTX9pQ2qskut4qEIsOHp62izmLxHhvIrECBcb9dmVmWewqAHdM8Gi-2BWkkvVRskD2TDSYJLQwgNVmE1I3yxc1b0lpOxnpiNXRNS5pj083s4iYStCODOaAQp4aIoAApf6bMPxcn62pgL4ywLrD16hE97k4pjlQwW5ntBDnRm5S55Vf9v416h8QZ2GQ?width=660&height=161&cropmode=none)
 
