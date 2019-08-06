@@ -62,7 +62,7 @@ The wind speed data used in this project has been collected at a height of 10m a
 
 ### Statistical Forecasting Results
 
-Four methods outperformed the benchmark of Persistence and only ETS significantly so. These methods are shown to the right. The table lists Mean Error (ME), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE) and relative improvement over persistence. The methods are sorted by MAE, which shows on average the deviation from actual values, while RMSE penalizes significant deviations. ME shows bias (errors potentially cancel each other) and MAPE quantifies error as “capacity” – however it is the least robust for this application due the reliance of division by potentially near-zero numbers.  Note that "BC" refers to the use of pre-processing by one-parameter formulation of Box-Cox transformation.
+Four methods outperformed the benchmark of Persistence and only ETS significantly so. These methods are in the table below. The table lists Mean Error (ME), Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE) and relative improvement over persistence. The methods are sorted by MAE, which shows on average the deviation from actual values, while RMSE penalizes significant deviations. ME shows bias (errors potentially cancel each other) and MAPE quantifies error as “capacity” – however it is the least robust for this application due the reliance of division by potentially near-zero numbers.  Note that "BC" refers to the use of pre-processing by one-parameter formulation of Box-Cox transformation.
 
 | Model       | ME   | RMSE | MAE  | MAPE  | rel. MAE | rel. RMSE |
 | ----------- | ---- | ---- | ---- | ----- | -------- | --------- |
