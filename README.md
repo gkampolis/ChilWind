@@ -37,7 +37,7 @@ future ones (![y_hat](https://latex.codecogs.com/gif.latex?%5Chat%7By%7D)).
 A number of methods were tested: 
 
 - exponential smoothening (ETS)
--  uto-regressive integrated moving averages with and without seasonal component (sARIMA, ARIMA)
+- auto-regressive integrated moving averages with and without seasonal component (sARIMA, ARIMA)
 - combinations of ETS and ARIMA with “Seasonal and Trend decomposition with Loess” (STL) to include  annual and diurnal seasonality
 - the TBATS method
 - and  a Neural Network to fit an auto-regressive model (NNAR) without the stationarity constraints of (s)ARIMA.
